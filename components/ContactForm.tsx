@@ -45,8 +45,14 @@ export default function ContactForm() {
 
     setStatus("submitting");
     try {
-      // Stub: swap for a real email service (e.g. Resend) here.
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
       setStatus("success");
       setValues(initialState);
     } catch {
@@ -85,6 +91,7 @@ export default function ContactForm() {
         <Field
           id="name"
           label="Name"
+          placeholder="John Smith"
           value={values.name}
           error={errors.name}
           onChange={(v) => handleChange("name", v)}
@@ -93,6 +100,7 @@ export default function ContactForm() {
           id="email"
           label="Email"
           type="email"
+          placeholder="john@company.com"
           value={values.email}
           error={errors.email}
           onChange={(v) => handleChange("email", v)}
@@ -102,6 +110,7 @@ export default function ContactForm() {
       <Field
         id="subject"
         label="Subject"
+        placeholder="What can we help with?"
         value={values.subject}
         error={errors.subject}
         onChange={(v) => handleChange("subject", v)}
@@ -114,11 +123,12 @@ export default function ContactForm() {
         <textarea
           id="message"
           rows={5}
+          placeholder="Tell us a bit about your project or renewal timeline…"
           value={values.message}
           onChange={(e) => handleChange("message", e.target.value)}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className="mt-1.5 w-full rounded-md border border-transparent bg-surface px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
+          className="mt-1.5 w-full rounded-md border border-navy/40 bg-white px-4 py-3 text-sm text-ink placeholder:text-navy/35 outline-none transition-colors focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
         />
         {errors.message && (
           <p id="message-error" className="mt-1.5 flex items-center gap-1.5 text-xs text-red-600">
@@ -163,6 +173,7 @@ function Field({
   error,
   onChange,
   type = "text",
+  placeholder,
 }: {
   id: Fields;
   label: string;
@@ -170,6 +181,7 @@ function Field({
   error?: string;
   onChange: (value: string) => void;
   type?: string;
+  placeholder?: string;
 }) {
   return (
     <div>
@@ -180,10 +192,11 @@ function Field({
         id={id}
         type={type}
         value={value}
+        placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="mt-1.5 w-full rounded-md border border-transparent bg-surface px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
+        className="mt-1.5 w-full rounded-md border border-navy/40 bg-white px-4 py-3 text-sm text-ink placeholder:text-navy/35 outline-none transition-colors focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
       />
       {error && (
         <p id={`${id}-error`} className="mt-1.5 flex items-center gap-1.5 text-xs text-red-600">

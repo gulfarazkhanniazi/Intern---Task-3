@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import {
-  COMPANY_ADDRESS,
   COMPANY_EMAIL,
   COMPANY_NAME,
   COMPANY_PHONE,
@@ -72,10 +71,6 @@ export default function Footer() {
               Keep in Touch
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-white/70">
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
-                <span>{COMPANY_ADDRESS}</span>
-              </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-accent-light" aria-hidden="true" />
                 <a href={`tel:${COMPANY_PHONE_DIGITS}`} className="hover:text-accent-light">

@@ -18,9 +18,10 @@ export default function CaseStudiesPage() {
         eyebrow="Case Studies"
         title="Results our clients can measure"
         subtitle="A look at the kind of procurement and technology projects we deliver for clients."
+        tight
       />
 
-      <section className="py-24 md:py-28">
+      <section className="pt-6 pb-16 md:pb-20">
         <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:px-10">
           {CASE_STUDIES.map((study, i) => (
             <CaseStudyCard
@@ -34,7 +35,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-navy-800 py-24 md:py-28">
+      <section className="relative overflow-hidden bg-navy-800 py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
           <Reveal>
             <Quote className="mx-auto h-10 w-10 text-accent-teal" aria-hidden="true" />

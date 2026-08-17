@@ -5,15 +5,21 @@ export default function PageHeader({
   eyebrow,
   title,
   subtitle,
+  tight = false,
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
+  tight?: boolean;
 }) {
   return (
-    <section className="relative overflow-hidden bg-surface pt-36 pb-20 md:pt-44 md:pb-24">
-      <DiagonalCorner position="top-right" color="teal" className="h-24 w-32 sm:h-32 sm:w-44" />
-      <DiagonalCorner position="top-right" color="blue" className="h-16 w-24 -translate-x-8 translate-y-6 sm:h-24 sm:w-32" />
+    <section
+      className={`relative overflow-hidden bg-surface pt-36 md:pt-44 ${
+        tight ? "pb-8 md:pb-10" : "pb-20 md:pb-24"
+      }`}
+    >
+      <DiagonalCorner position="top-right" color="blue" visibleFrom="xl" className="h-40 w-40 sm:h-48 sm:w-48" />
+      <DiagonalCorner position="top-right" color="teal" visibleFrom="xl" className="h-28 w-28 sm:h-36 sm:w-36" />
 
       <div className="relative mx-auto max-w-8xl px-6 lg:px-10">
         <Reveal>

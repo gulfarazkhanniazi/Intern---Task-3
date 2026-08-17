@@ -3,7 +3,7 @@ import { Clock, Mail, Phone } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import MapPlaceholder from "@/components/MapPlaceholder";
+import { DiagonalCorner } from "@/components/Diagonals";
 import {
   COMPANY_EMAIL,
   COMPANY_HOURS,
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   description: "Get in touch with our team for a quote or a project consultation.",
 };
 
-const SOCIAL_INITIALS: Record<string, string> = {
-  LinkedIn: "in",
-  "Twitter / X": "X",
-  Facebook: "f",
+const SOCIAL_STYLES: Record<string, { initial: string; color: string }> = {
+  LinkedIn: { initial: "in", color: "#0A66C2" },
+  "Twitter / X": { initial: "X", color: "#111111" },
+  Facebook: { initial: "f", color: "#1877F2" },
 };
 
 export default function ContactPage() {
@@ -30,54 +30,86 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Let's talk about your next project"
         subtitle="Reach out for a quote, a renewal review, or just to ask what's possible — our team typically responds within one business day."
+        tight
       />
 
-      <section className="py-24 md:py-28">
-        <div className="mx-auto grid max-w-8xl grid-cols-1 gap-16 px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-10">
-          <Reveal className="space-y-8">
-            <div>
-              <h2 className="font-display text-xl font-semibold text-navy">
-                Contact Information
+      <section className="pt-4 pb-16 md:pb-20">
+        <div className="mx-auto grid max-w-8xl grid-cols-1 gap-16 px-4 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-20">
+          <Reveal className="relative overflow-hidden rounded-2xl border border-navy/10 bg-white p-6 sm:p-10 text-center shadow-sm shadow-navy/5">
+            <DiagonalCorner position="top-left" color="teal" className="h-8 w-8 sm:h-8 sm:w-8 -translate-x-4 -translate-y-4 opacity-60" />
+            <DiagonalCorner position="bottom-right" color="blue" className="h-8 w-8 sm:h-8 sm:w-8 translate-x-4 translate-y-4 opacity-60" />
+
+            <div className="relative">
+              <h2 className="font-display text-2xl font-bold text-ink">
+                Feel free to keep in touch
               </h2>
-              <ul className="mt-5 space-y-4">
-                <li className="flex items-center gap-3 text-sm text-muted">
-                  <Mail className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
-                  <a href={`mailto:${COMPANY_EMAIL}`} className="hover:text-accent">
+              <p className="mt-3 text-sm text-muted">
+                Have a procurement need, renewal deadline, or IT project on
+                the horizon? Let&apos;s talk.
+              </p>
+
+              <div className="mx-auto mt-8 h-px w-12 bg-navy/10" />
+
+              <div className="mt-8 space-y-6">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">
+                    Email
+                  </p>
+                  <a
+                    href={`mailto:${COMPANY_EMAIL}`}
+                    className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-accent-blue"
+                  >
+                    <Mail className="h-4 w-4 text-accent-blue" aria-hidden="true" />
                     {COMPANY_EMAIL}
                   </a>
-                </li>
-                <li className="flex items-center gap-3 text-sm text-muted">
-                  <Phone className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
-                  <a href={`tel:${COMPANY_PHONE_DIGITS}`} className="hover:text-accent">
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">
+                    Contact No.
+                  </p>
+                  <a
+                    href={`tel:${COMPANY_PHONE_DIGITS}`}
+                    className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-accent-blue"
+                  >
+                    <Phone className="h-4 w-4 text-accent-blue" aria-hidden="true" />
                     {COMPANY_PHONE}
                   </a>
-                </li>
-                <li className="flex items-center gap-3 text-sm text-muted">
-                  <Clock className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
-                  {COMPANY_HOURS}
-                </li>
-              </ul>
-            </div>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">
+                    Business Hours
+                  </p>
+                  <p className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-ink">
+                    <Clock className="h-4 w-4 text-accent-blue" aria-hidden="true" />
+                    {COMPANY_HOURS}
+                  </p>
+                </div>
+              </div>
 
-            <div>
-              <h2 className="font-display text-xl font-semibold text-navy">
-                Follow Us
-              </h2>
-              <div className="mt-4 flex items-center gap-3">
-                {SOCIAL_LINKS.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/10 text-sm font-semibold text-navy transition-colors hover:border-accent hover:bg-accent hover:text-white"
-                  >
-                    {SOCIAL_INITIALS[social.label]}
-                  </a>
-                ))}
+              <div className="mx-auto mt-8 h-px w-12 bg-navy/10" />
+
+              <div className="mt-8">
+                <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">
+                  Follow Us
+                </p>
+                <div className="mt-3 flex items-center justify-center gap-3">
+                  {SOCIAL_LINKS.map((social) => {
+                    const style = SOCIAL_STYLES[social.label];
+                    return (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        aria-label={social.label}
+                        style={{ backgroundColor: style.color }}
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold text-white transition-transform hover:scale-110"
+                      >
+                        {style.initial}
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-
-            <MapPlaceholder />
           </Reveal>
 
           <Reveal delay={100}>

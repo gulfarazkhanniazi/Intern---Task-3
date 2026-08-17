@@ -28,12 +28,12 @@ export default function ServiceCard({
           aria-hidden="true"
         />
         <h3
-          className={`mt-4 font-display text-lg font-semibold ${dark ? "text-white" : "text-ink"}`}
+          className={`mt-4 font-display text-lg ${dark ? "font-normal text-white/90" : "font-semibold text-ink"}`}
         >
           {service.title}
         </h3>
         <p
-          className={`mt-2 text-sm leading-relaxed ${dark ? "text-white/60" : "text-muted"}`}
+          className={`mt-2 text-sm leading-relaxed ${dark ? "font-light text-white/85" : "text-muted"}`}
         >
           {service.short}
         </p>

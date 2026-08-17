@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Award } from "lucide-react";
-import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+import Placeholder from "@/components/Placeholder";
+import { DiagonalCorner } from "@/components/Diagonals";
+import { ABOUT_HERO_IMAGE } from "@/lib/images";
 import { AWARDS, COMPANY_NAME } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -9,13 +11,57 @@ export const metadata: Metadata = {
   description: `The story behind ${COMPANY_NAME} and how we help businesses manage enterprise technology.`,
 };
 
+const STATS = [
+  { value: "10+", label: "Years in business" },
+  { value: "200+", label: "Clients served" },
+  { value: "20+", label: "Vendor partners" },
+];
+
 export default function AboutPage() {
   return (
     <>
-      <PageHeader eyebrow="About Us" title="Our story" />
+      {/* About hero */}
+      <section className="relative overflow-hidden bg-surface pt-36 pb-20 md:pt-44 md:pb-24">
+        <DiagonalCorner position="top-right" color="blue" visibleFrom="xl" className="mr-4 h-56 w-56 -translate-y-16 sm:mr-10 sm:h-72 sm:w-72" />
+        <DiagonalCorner position="top-right" color="teal" visibleFrom="xl" className="mr-2 h-36 w-36 -translate-y-6 sm:mr-4 sm:h-52 sm:w-52" />
+        <DiagonalCorner position="bottom-left" color="teal" visibleFrom="xl" className="h-24 w-24 -translate-x-8 translate-y-8 opacity-70 sm:h-32 sm:w-32" />
+
+        <div className="relative mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
+          <Reveal>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-blue">
+              About Us
+            </p>
+            <h1 className="mt-4 font-display text-4xl font-bold text-ink sm:text-5xl">
+              Our story
+            </h1>
+            <p className="mt-5 max-w-xl text-lg text-muted">
+              A technology partner built around one idea: procurement should
+              be simple, transparent, and handled by people who actually
+              know your business.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-8">
+              {STATS.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-display text-3xl font-bold text-accent-blue">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={100} className="relative">
+            <DiagonalCorner position="top-left" color="teal" className="h-12 w-12 -translate-x-3 -translate-y-3 sm:h-16 sm:w-16" />
+            <DiagonalCorner position="bottom-right" color="blue" className="h-12 w-12 translate-x-3 translate-y-3 sm:h-16 sm:w-16" />
+            <Placeholder label="Our team at Corvex Technology Group" src={ABOUT_HERO_IMAGE} aspect="aspect-4/3" priority />
+          </Reveal>
+        </div>
+      </section>
 
       {/* Company story */}
-      <section className="bg-surface py-24 md:py-28">
+      <section className="bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-6 lg:px-12">
           <div className="grid grid-cols-1 gap-x-16 gap-y-4 sm:grid-cols-[180px_1fr]">
             <Reveal>
@@ -83,7 +129,7 @@ export default function AboutPage() {
       </section>
 
       {/* Awards & Recognition */}
-      <section className="bg-surface py-24 md:py-28">
+      <section className="bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-8xl px-6 lg:px-10">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-blue">
@@ -95,16 +141,32 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {AWARDS.map((award, i) => (
-              <Reveal key={award} delay={i * 60}>
-                <div className="flex aspect-3/2 flex-col items-center justify-center gap-2 rounded-xl border border-navy/10 bg-white px-3 text-center grayscale transition-all duration-300 hover:grayscale-0">
-                  <Award className="h-6 w-6 text-navy/40" aria-hidden="true" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wide text-navy/50">
-                    {award}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+            {AWARDS.map((award, i) => {
+              const styles =
+                i % 2 === 0
+                  ? {
+                      card: "border-accent-blue/20 bg-accent-blue/5",
+                      badge: "bg-accent-blue",
+                    }
+                  : {
+                      card: "border-accent-teal/20 bg-accent-teal/5",
+                      badge: "bg-accent-teal",
+                    };
+              return (
+                <Reveal key={award} delay={i * 60}>
+                  <div
+                    className={`group flex flex-col items-center justify-center gap-2 rounded-xl border px-3 py-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md min-h-[140px] ${styles.card}`}
+                  >
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-full text-white ${styles.badge}`}>
+                      <Award className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-ink">
+                      {award}
+                    </span>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

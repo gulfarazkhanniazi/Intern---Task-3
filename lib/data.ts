@@ -108,37 +108,47 @@ export const PROCESS_STEPS = [
   },
 ] as const;
 
-export const FEATURED_WORK = [
-  { title: "Licensing Consolidation", category: "Software Licensing" },
-  { title: "Cloud Migration Initiative", category: "Cloud Solutions" },
-  { title: "Enterprise Server Refresh", category: "Hardware Procurement" },
-  { title: "Zero-Trust Security Rollout", category: "Cybersecurity" },
-] as const;
 
 export const VALUE_PROPS = [
   {
     icon: "Building2",
     title: "Enterprise IT Solutions",
     description:
-      "End-to-end technology sourcing built for organizations of every size.",
+      "End-to-end technology sourcing built for organizations of every size — from a single department refresh to a multi-site infrastructure rollout. We scope the requirement, source the right hardware and software, and manage delivery so your team isn't stitching together five different vendor relationships.",
+    highlights: [
+      "Hardware, software, cloud, and security under one roof",
+      "Scales from single-site to multi-location deployments",
+    ],
   },
   {
     icon: "DollarSign",
     title: "Competitive Pricing",
     description:
-      "Vendor relationships that translate into real savings on every order.",
+      "Our vendor relationships translate into real savings on every order, not just the first one. We benchmark pricing against the market at renewal time and flag opportunities to consolidate licenses or right-size hardware before you pay for capacity you don't need.",
+    highlights: [
+      "Market benchmarking on every renewal",
+      "No markup surprises — transparent, itemized quotes",
+    ],
   },
   {
     icon: "Globe",
     title: "Trusted Global Brands",
     description:
-      "Authorized partnerships with the manufacturers you already rely on.",
+      "We hold authorized reseller status with the manufacturers your business already relies on, so every product you receive is genuine, warrantied, and backed by the vendor — never gray-market or unverified hardware.",
+    highlights: [
+      "Authorized reseller status across major manufacturers",
+      "Full manufacturer warranty on every order",
+    ],
   },
   {
     icon: "Zap",
     title: "Fast Quotes & Support",
     description:
-      "A dedicated account team that responds in hours, not days.",
+      "A dedicated account team that responds in hours, not days. When a renewal deadline is approaching or a server goes down, you get a direct line to someone who already knows your environment — not a ticket queue.",
+    highlights: [
+      "Dedicated account team, not a support queue",
+      "Quotes typically turned around within one business day",
+    ],
   },
 ] as const;
 

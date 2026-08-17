@@ -35,7 +35,7 @@ export default function Header() {
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-8 lg:flex"
+          className="hidden items-center gap-8 xl:flex"
         >
           {NAV_LINKS.map((link) => {
             const active =
@@ -57,7 +57,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <span className="text-sm text-muted">Let&apos;s talk:</span>
           <a
             href={`tel:${COMPANY_PHONE_DIGITS}`}
@@ -73,7 +73,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-ink lg:hidden"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-ink xl:hidden"
         >
           {open ? (
             <X className="h-6 w-6" aria-hidden="true" />
@@ -85,7 +85,7 @@ export default function Header() {
 
       <div
         id="mobile-menu"
-        className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out lg:hidden ${
+        className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out xl:hidden max-h-[calc(100vh-80px)] overflow-y-auto ${
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >

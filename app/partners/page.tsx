@@ -28,9 +28,10 @@ export default function PartnersPage() {
         eyebrow="Our Partners"
         title="Trusted global brands, one point of contact"
         subtitle="We hold authorized reseller status with leading manufacturers across hardware, software, cloud, and security — so you get genuine products, competitive pricing, and manufacturer-backed support."
+        tight
       />
 
-      <section className="py-24 md:py-28">
+      <section className="pt-6 pb-16 md:pb-20">
         <div className="mx-auto max-w-8xl px-6 lg:px-10">
           <Reveal className="text-center">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-blue">
@@ -44,8 +45,8 @@ export default function PartnersPage() {
       </section>
 
       <section className="relative overflow-hidden bg-navy-800 py-24 md:py-28">
-        <DiagonalCorner position="top-left" color="blue" className="h-40 w-56 sm:h-56 sm:w-80" />
-        <DiagonalCorner position="top-right" color="teal" className="h-32 w-44 sm:h-44 sm:w-60" />
+        <DiagonalCorner position="top-left" color="blue" visibleFrom="xl" className="mr-4 h-56 w-56 sm:mr-10 sm:h-72 sm:w-72" />
+        <DiagonalCorner position="top-right" color="teal" visibleFrom="xl" className="mr-2 h-36 w-36 sm:mr-4 sm:h-52 sm:w-52" />
 
         <div className="relative mx-auto max-w-8xl px-6 lg:px-10">
           <Reveal className="mx-auto max-w-2xl text-center">

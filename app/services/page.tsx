@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import ServiceCard from "@/components/ServiceCard";
 import FeatureRow from "@/components/FeatureRow";
 import { DiagonalCorner } from "@/components/Diagonals";
+import { SERVICE_IMAGES } from "@/lib/images";
 import { PROCESS_STEPS, SERVICES } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -19,12 +20,13 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="What we do"
         subtitle="Full-service procurement, licensing, and consulting — under one roof, with one point of contact."
+        tight
       />
 
       {/* What We Do */}
-      <section className="relative overflow-hidden bg-navy-800 py-24 md:py-28">
-        <DiagonalCorner position="top-right" color="teal" className="h-32 w-44 sm:h-44 sm:w-60" />
-        <DiagonalCorner position="bottom-left" color="blue" className="h-40 w-56 sm:h-56 sm:w-80" />
+      <section className="relative overflow-hidden bg-navy-800 pt-10 pb-16 md:pb-20">
+        <DiagonalCorner position="top-right" color="blue" visibleFrom="xl" className="h-40 w-40 sm:h-48 sm:w-48" />
+        <DiagonalCorner position="bottom-left" color="teal" visibleFrom="xl" className="h-28 w-28 sm:h-36 sm:w-36" />
 
         <div className="relative mx-auto max-w-8xl px-6 lg:px-10">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
@@ -36,7 +38,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Our Process */}
-      <section className="bg-surface py-24 md:py-28">
+      <section className="bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-8xl px-6 lg:px-10">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-blue">
@@ -74,8 +76,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Detailed breakdown */}
-      <section className="py-24 md:py-28">
-        <div className="mx-auto flex max-w-8xl flex-col gap-24 px-6 lg:px-10">
+      <section className="py-16 md:py-20">
+        <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 lg:px-10">
           {SERVICES.map((service, i) => (
             <FeatureRow
               key={service.slug}
@@ -84,6 +86,7 @@ export default function ServicesPage() {
               description={service.description}
               highlights={[...service.highlights]}
               cta={{ href: "/contact", label: "Read More" }}
+              src={SERVICE_IMAGES[service.title]}
               reversed={i % 2 === 1}
               variant={i}
             />

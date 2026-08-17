@@ -1,7 +1,8 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import Reveal from "./Reveal";
 import Button from "./Button";
 import Placeholder from "./Placeholder";
+import { DiagonalCorner } from "./Diagonals";
 
 export default function FeatureRow({
   eyebrow,
@@ -11,6 +12,9 @@ export default function FeatureRow({
   cta,
   reversed = false,
   variant = 0,
+  icon,
+  imageLabel,
+  src,
 }: {
   eyebrow?: string;
   title: string;
@@ -19,6 +23,9 @@ export default function FeatureRow({
   cta?: { href: string; label: string };
   reversed?: boolean;
   variant?: number;
+  icon?: LucideIcon;
+  imageLabel?: string;
+  src?: string;
 }) {
   return (
     <div
@@ -26,8 +33,16 @@ export default function FeatureRow({
         reversed ? "lg:[&>*:first-child]:order-2" : ""
       }`}
     >
-      <Reveal>
-        <Placeholder label={title} variant={variant} aspect="aspect-4/3" className="max-w-md" />
+      <Reveal className="relative">
+        <DiagonalCorner position="top-left" color="teal" className="h-12 w-16 -translate-x-3 -translate-y-3" />
+        <DiagonalCorner position="bottom-right" color="blue" className="h-12 w-16 translate-x-3 translate-y-3" />
+        <Placeholder
+          label={imageLabel ?? title}
+          src={src}
+          icon={icon}
+          variant={variant}
+          aspect="aspect-4/3"
+        />
       </Reveal>
       <Reveal delay={100}>
         {eyebrow && (
