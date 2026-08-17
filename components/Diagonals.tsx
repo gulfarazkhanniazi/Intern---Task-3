@@ -25,7 +25,7 @@ export function DiagonalCorner({
     xl: "hidden xl:block",
   };
 
-  const fill = color === "teal" ? "#2ccab9" : "#2951d5";
+  const fill = color === "teal" ? "#475569" : "#2951d5";
 
   return (
     <svg

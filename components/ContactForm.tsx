@@ -3,29 +3,35 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Send, TriangleAlert } from "lucide-react";
 
-type Fields = "name" | "email" | "subject" | "message";
+type Fields = "name" | "email" | "phone" | "subject" | "message";
 type FormState = Record<Fields, string>;
 type Status = "idle" | "submitting" | "success" | "error";
 
 const initialState: FormState = {
   name: "",
   email: "",
+  phone: "",
   subject: "",
   message: "",
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[0-9+()\-\s]{7,20}$/;
 
 export default function ContactForm() {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   function validate(v: FormState): Partial<FormState> {
     const next: Partial<FormState> = {};
     if (!v.name.trim()) next.name = "Please enter your name.";
     if (!v.email.trim()) next.email = "Please enter your email.";
     else if (!EMAIL_RE.test(v.email)) next.email = "Enter a valid email address.";
+    if (!v.phone.trim()) next.phone = "Please enter your phone number.";
+    else if (!PHONE_RE.test(v.phone.trim()) || v.phone.replace(/\D/g, "").length < 7)
+      next.phone = "Enter a valid phone number.";
     if (!v.subject.trim()) next.subject = "Please enter a subject.";
     if (!v.message.trim() || v.message.trim().length < 10)
       next.message = "Message should be at least 10 characters.";
@@ -44,6 +50,7 @@ export default function ContactForm() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("submitting");
+    setErrorMessage("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -51,11 +58,18 @@ export default function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      if (!res.ok) throw new Error("Request failed");
+      const data: { error?: string } | null = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        setErrorMessage(data?.error || "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
 
       setStatus("success");
       setValues(initialState);
     } catch {
+      setErrorMessage("Network error — check your connection and try again.");
       setStatus("error");
     }
   }
@@ -107,14 +121,25 @@ export default function ContactForm() {
         />
       </div>
 
-      <Field
-        id="subject"
-        label="Subject"
-        placeholder="What can we help with?"
-        value={values.subject}
-        error={errors.subject}
-        onChange={(v) => handleChange("subject", v)}
-      />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <Field
+          id="phone"
+          label="Phone Number"
+          type="tel"
+          placeholder="+1 (555) 234-7890"
+          value={values.phone}
+          error={errors.phone}
+          onChange={(v) => handleChange("phone", v)}
+        />
+        <Field
+          id="subject"
+          label="Subject"
+          placeholder="What can we help with?"
+          value={values.subject}
+          error={errors.subject}
+          onChange={(v) => handleChange("subject", v)}
+        />
+      </div>
 
       <div>
         <label htmlFor="message" className="text-sm font-medium text-ink">
@@ -139,9 +164,9 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="flex items-center gap-1.5 text-sm text-red-600">
+        <p role="alert" className="flex items-center gap-1.5 text-sm text-red-600">
           <TriangleAlert className="h-4 w-4" aria-hidden="true" />
-          Something went wrong. Please try again.
+          {errorMessage || "Something went wrong. Please try again."}
         </p>
       )}
 

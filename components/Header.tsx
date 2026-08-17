@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -26,11 +27,15 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-navy/10 bg-surface/95 backdrop-blur supports-backdrop-blur:bg-surface/85">
       <div className="mx-auto flex max-w-8xl items-center justify-between px-6 py-4 lg:px-10">
-        <Link
-          href="/"
-          className="font-display text-xl font-bold tracking-tight text-ink"
-        >
-          {COMPANY_NAME}
+        <Link href="/" className="flex items-center" aria-label={COMPANY_NAME}>
+          <Image
+            src="/logo.png"
+            alt={COMPANY_NAME}
+            width={2172}
+            height={724}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         <nav

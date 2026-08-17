@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { COMPANY_EMAIL } from "@/lib/data";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[0-9+()\-\s]{7,20}$/;
 
 function escapeHtml(value: string) {
   return value
@@ -14,7 +15,7 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
-  let body: { name?: string; email?: string; subject?: string; message?: string };
+  let body: { name?: string; email?: string; phone?: string; subject?: string; message?: string };
   try {
     body = await request.json();
   } catch {
@@ -23,14 +24,24 @@ export async function POST(request: Request) {
 
   const name = body.name?.trim() ?? "";
   const email = body.email?.trim() ?? "";
+  const phone = body.phone?.trim() ?? "";
   const subject = body.subject?.trim() ?? "";
   const message = body.message?.trim() ?? "";
 
-  if (!name || !email || !subject || !message) {
+  if (!name || !email || !phone || !subject || !message) {
     return NextResponse.json({ error: "All fields are required." }, { status: 400 });
   }
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
+  }
+  if (!PHONE_RE.test(phone) || phone.replace(/\D/g, "").length < 7) {
+    return NextResponse.json({ error: "Enter a valid phone number." }, { status: 400 });
+  }
+  if (message.length < 10) {
+    return NextResponse.json(
+      { error: "Message should be at least 10 characters." },
+      { status: 400 }
+    );
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -44,26 +55,34 @@ export async function POST(request: Request) {
 
   const resend = new Resend(apiKey);
   const toAddress = process.env.CONTACT_TO_EMAIL || COMPANY_EMAIL;
-  const fromAddress = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
+  const verifiedDomain = process.env.RESEND_VERIFIED_DOMAIN;
+  const fromAddress =
+    process.env.CONTACT_FROM_EMAIL || (verifiedDomain ? `contact@${verifiedDomain}` : "onboarding@resend.dev");
 
-  const { error } = await resend.emails.send({
-    from: `Website Contact Form <${fromAddress}>`,
-    to: [toAddress],
-    replyTo: email,
-    subject: `[Contact Form] ${subject}`,
-    html: `
-      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-      <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
-    `,
-  });
+  try {
+    const { error } = await resend.emails.send({
+      from: `Website Contact Form <${fromAddress}>`,
+      to: [toAddress],
+      replyTo: email,
+      subject: `[Contact Form] ${subject}`,
+      html: `
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+        <p><strong>Message:</strong></p>
+        <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
+      `,
+    });
 
-  if (error) {
-    console.error("Resend error:", error);
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: "Failed to send message." }, { status: 502 });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("Unexpected error sending contact email:", err);
     return NextResponse.json({ error: "Failed to send message." }, { status: 502 });
   }
-
-  return NextResponse.json({ ok: true });
 }

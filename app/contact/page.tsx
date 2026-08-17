@@ -7,14 +7,28 @@ import { DiagonalCorner } from "@/components/Diagonals";
 import {
   COMPANY_EMAIL,
   COMPANY_HOURS,
+  COMPANY_NAME,
   COMPANY_PHONE,
   COMPANY_PHONE_DIGITS,
   SOCIAL_LINKS,
 } from "@/lib/data";
 
+const PAGE_DESCRIPTION = "Get in touch with our team for a quote or a project consultation.";
+
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with our team for a quote or a project consultation.",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `Contact | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 const SOCIAL_STYLES: Record<string, { initial: string; color: string }> = {

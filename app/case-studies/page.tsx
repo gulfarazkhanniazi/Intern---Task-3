@@ -3,12 +3,25 @@ import { Quote } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import CaseStudyCard from "@/components/CaseStudyCard";
-import { CASE_STUDIES } from "@/lib/data";
+import { CASE_STUDIES, COMPANY_NAME } from "@/lib/data";
+
+const PAGE_DESCRIPTION =
+  "A look at the procurement and technology projects we deliver for clients.";
 
 export const metadata: Metadata = {
   title: "Case Studies",
-  description:
-    "A look at the procurement and technology projects we deliver for clients.",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `Case Studies | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Case Studies | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 export default function CaseStudiesPage() {

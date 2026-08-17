@@ -6,9 +6,22 @@ import { DiagonalCorner } from "@/components/Diagonals";
 import { ABOUT_HERO_IMAGE } from "@/lib/images";
 import { AWARDS, COMPANY_NAME } from "@/lib/data";
 
+const PAGE_DESCRIPTION = `The story behind ${COMPANY_NAME} and how we help businesses manage enterprise technology.`;
+
 export const metadata: Metadata = {
   title: "About",
-  description: `The story behind ${COMPANY_NAME} and how we help businesses manage enterprise technology.`,
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `About | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `About | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 const STATS = [
@@ -55,7 +68,7 @@ export default function AboutPage() {
           <Reveal delay={100} className="relative">
             <DiagonalCorner position="top-left" color="teal" className="h-12 w-12 -translate-x-3 -translate-y-3 sm:h-16 sm:w-16" />
             <DiagonalCorner position="bottom-right" color="blue" className="h-12 w-12 translate-x-3 translate-y-3 sm:h-16 sm:w-16" />
-            <Placeholder label="Our team at Corvex Technology Group" src={ABOUT_HERO_IMAGE} aspect="aspect-4/3" priority />
+            <Placeholder label="Our team at TechRynex" src={ABOUT_HERO_IMAGE} aspect="aspect-4/3" priority />
           </Reveal>
         </div>
       </section>
@@ -155,7 +168,7 @@ export default function AboutPage() {
               return (
                 <Reveal key={award} delay={i * 60}>
                   <div
-                    className={`group flex flex-col items-center justify-center gap-2 rounded-xl border px-3 py-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md min-h-[140px] ${styles.card}`}
+                    className={`group flex flex-col items-center justify-center gap-2 rounded-xl border px-3 py-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md min-h-35 ${styles.card}`}
                   >
                     <div className={`flex h-10 w-10 items-center justify-center rounded-full text-white ${styles.badge}`}>
                       <Award className="h-5 w-5" aria-hidden="true" />

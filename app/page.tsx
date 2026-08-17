@@ -10,10 +10,23 @@ import { DiagonalCorner } from "@/components/Diagonals";
 import { INTRO_IMAGE, VALUE_PROP_IMAGES } from "@/lib/images";
 import { COMPANY_NAME, SERVICES, VALUE_PROPS } from "@/lib/data";
 
+const PAGE_DESCRIPTION =
+  "Enterprise IT procurement, licensing, hardware, cloud, and cybersecurity solutions from a single trusted partner.";
+
 export const metadata: Metadata = {
   title: "Home",
-  description:
-    "Enterprise IT procurement, licensing, hardware, cloud, and cybersecurity solutions from a single trusted partner.",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `Home | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Home | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 export default function Home() {
@@ -28,7 +41,7 @@ export default function Home() {
             <DiagonalCorner position="top-left" color="teal" className="h-12 w-16 -translate-x-3 -translate-y-3" />
             <DiagonalCorner position="bottom-right" color="blue" className="h-12 w-16 translate-x-3 translate-y-3" />
             <Placeholder
-              label="We are Corvex Technology Group"
+              label="We are TechRynex"
               src={INTRO_IMAGE}
               aspect="aspect-4/3"
               priority

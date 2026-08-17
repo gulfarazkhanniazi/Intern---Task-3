@@ -5,12 +5,25 @@ import ServiceCard from "@/components/ServiceCard";
 import FeatureRow from "@/components/FeatureRow";
 import { DiagonalCorner } from "@/components/Diagonals";
 import { SERVICE_IMAGES } from "@/lib/images";
-import { PROCESS_STEPS, SERVICES } from "@/lib/data";
+import { COMPANY_NAME, PROCESS_STEPS, SERVICES } from "@/lib/data";
+
+const PAGE_DESCRIPTION =
+  "Software licensing, hardware procurement, cybersecurity, and cloud services delivered end to end.";
 
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "Software licensing, hardware procurement, cybersecurity, and cloud services delivered end to end.",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `Services | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Services | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 export default function ServicesPage() {

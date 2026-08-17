@@ -16,12 +16,31 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://techrynex.com";
+const DEFAULT_TITLE = `${COMPANY_NAME} | Enterprise IT Procurement & Managed Services`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: `${COMPANY_NAME} | Enterprise IT Procurement & Managed Services`,
+    default: DEFAULT_TITLE,
     template: `%s | ${COMPANY_NAME}`,
   },
   description: COMPANY_TAGLINE,
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    siteName: COMPANY_NAME,
+    url: SITE_URL,
+    title: DEFAULT_TITLE,
+    description: COMPANY_TAGLINE,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: COMPANY_TAGLINE,
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

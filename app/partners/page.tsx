@@ -4,12 +4,25 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import PartnerLogos from "@/components/PartnerLogos";
 import { DiagonalCorner } from "@/components/Diagonals";
-import { SOLUTIONS_WE_OFFER } from "@/lib/data";
+import { COMPANY_NAME, SOLUTIONS_WE_OFFER } from "@/lib/data";
+
+const PAGE_DESCRIPTION =
+  "Authorized partnerships with trusted global technology manufacturers and vendors.";
 
 export const metadata: Metadata = {
   title: "Our Partners",
-  description:
-    "Authorized partnerships with trusted global technology manufacturers and vendors.",
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: `Our Partners | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/logo.png", width: 2172, height: 724, alt: COMPANY_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Our Partners | ${COMPANY_NAME}`,
+    description: PAGE_DESCRIPTION,
+    images: ["/logo.png"],
+  },
 };
 
 const ICONS: Record<string, LucideIcon> = {
