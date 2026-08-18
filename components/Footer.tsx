@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import {
+  COMPANY_ADDRESS,
   COMPANY_EMAIL,
   COMPANY_NAME,
   COMPANY_PHONE,
@@ -88,6 +89,10 @@ export default function Footer() {
                 <a href={`mailto:${COMPANY_EMAIL}`} className="hover:text-accent-blue">
                   {COMPANY_EMAIL}
                 </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-blue" aria-hidden="true" />
+                <span>{COMPANY_ADDRESS}</span>
               </li>
             </ul>
           </div>

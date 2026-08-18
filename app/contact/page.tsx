@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Clock, Mail, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { DiagonalCorner } from "@/components/Diagonals";
 import {
+  COMPANY_ADDRESS,
   COMPANY_EMAIL,
   COMPANY_HOURS,
   COMPANY_NAME,
@@ -88,6 +89,15 @@ export default function ContactPage() {
                     <Phone className="h-4 w-4 text-accent-blue" aria-hidden="true" />
                     {COMPANY_PHONE}
                   </a>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">
+                    Business Address
+                  </p>
+                  <p className="mt-1 inline-flex items-start justify-center gap-2 text-sm font-medium text-ink">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-blue" aria-hidden="true" />
+                    {COMPANY_ADDRESS}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-accent-blue">

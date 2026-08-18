@@ -4,7 +4,8 @@ export const COMPANY_TAGLINE =
 export const COMPANY_PHONE = "+1 (307) 449-2961";
 export const COMPANY_PHONE_DIGITS = "+13074492961";
 export const COMPANY_EMAIL = "Procurement@techrynex.com";
-export const COMPANY_ADDRESS = "[Street Address, City, ST 00000]";
+export const COMPANY_ADDRESS =
+  "1001 S. Main St. STE 500, Kalispell, MT 59901";
 export const COMPANY_HOURS = "Mon – Fri, 9:00 AM – 6:00 PM";
 
 export const NAV_LINKS = [
