@@ -1,9 +1,9 @@
 export const COMPANY_NAME = "TechRynex";
 export const COMPANY_TAGLINE =
   "From Licensing to Infrastructure. We've Got IT Covered.";
-export const COMPANY_PHONE = "+1 (555) 234-7890";
-export const COMPANY_PHONE_DIGITS = "+15552347890";
-export const COMPANY_EMAIL = "info@techrynex.com";
+export const COMPANY_PHONE = "+1 (307) 449-2961";
+export const COMPANY_PHONE_DIGITS = "+13074492961";
+export const COMPANY_EMAIL = "Procurement@techrynex.com";
 export const COMPANY_ADDRESS = "[Street Address, City, ST 00000]";
 export const COMPANY_HOURS = "Mon – Fri, 9:00 AM – 6:00 PM";
 

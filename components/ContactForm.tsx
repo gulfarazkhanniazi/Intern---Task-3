@@ -126,7 +126,7 @@ export default function ContactForm() {
           id="phone"
           label="Phone Number"
           type="tel"
-          placeholder="+1 (555) 234-7890"
+          placeholder="+1 (307) 449-2961"
           value={values.phone}
           error={errors.phone}
           onChange={(v) => handleChange("phone", v)}
