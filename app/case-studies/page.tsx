@@ -11,6 +11,7 @@ const PAGE_DESCRIPTION =
 export const metadata: Metadata = {
   title: "Case Studies",
   description: PAGE_DESCRIPTION,
+  alternates: { canonical: "/case-studies" },
   openGraph: {
     title: `Case Studies | ${COMPANY_NAME}`,
     description: PAGE_DESCRIPTION,

@@ -1,3 +1,7 @@
+// Canonical origin. The apex domain 308-redirects to www, so www is the
+// address search engines should index.
+export const SITE_URL = "https://www.techrynex.com";
+
 export const COMPANY_NAME = "TechRynex";
 export const COMPANY_TAGLINE =
   "From Licensing to Infrastructure. We've Got IT Covered.";

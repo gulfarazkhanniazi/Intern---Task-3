@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/data";
+import { COMPANY_NAME, COMPANY_TAGLINE, SITE_URL } from "@/lib/data";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -16,7 +16,6 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://techrynex.com";
 const DEFAULT_TITLE = `${COMPANY_NAME} | Enterprise IT Procurement & Managed Services`;
 
 export const metadata: Metadata = {
@@ -27,6 +26,7 @@ export const metadata: Metadata = {
   },
   description: COMPANY_TAGLINE,
   robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: COMPANY_NAME,

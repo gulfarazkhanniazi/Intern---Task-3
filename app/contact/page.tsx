@@ -19,6 +19,7 @@ const PAGE_DESCRIPTION = "Get in touch with our team for a quote or a project co
 export const metadata: Metadata = {
   title: "Contact",
   description: PAGE_DESCRIPTION,
+  alternates: { canonical: "/contact" },
   openGraph: {
     title: `Contact | ${COMPANY_NAME}`,
     description: PAGE_DESCRIPTION,

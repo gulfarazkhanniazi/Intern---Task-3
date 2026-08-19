@@ -11,6 +11,7 @@ const PAGE_DESCRIPTION = `The story behind ${COMPANY_NAME} and how we help busin
 export const metadata: Metadata = {
   title: "About",
   description: PAGE_DESCRIPTION,
+  alternates: { canonical: "/about" },
   openGraph: {
     title: `About | ${COMPANY_NAME}`,
     description: PAGE_DESCRIPTION,

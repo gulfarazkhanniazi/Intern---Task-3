@@ -12,6 +12,7 @@ const PAGE_DESCRIPTION =
 export const metadata: Metadata = {
   title: "Our Partners",
   description: PAGE_DESCRIPTION,
+  alternates: { canonical: "/partners" },
   openGraph: {
     title: `Our Partners | ${COMPANY_NAME}`,
     description: PAGE_DESCRIPTION,
